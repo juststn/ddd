@@ -1,0 +1,123 @@
+#include "list.h"
+using namespace std;
+
+void printReverse(node* head);
+int getMax(node* head);
+
+float countTotal(node* head, int &sum, int &count);
+int count5(node* head);
+void delete6(node* head);
+void reverse(node* head, int n);
+int main()
+{
+    node * head = NULL;
+    build(head);
+    display_all(head);
+
+    printReverse(head);
+
+    cout << endl;
+    cout << "max: " << getMax(head) << endl;
+    
+    int sum=0;
+    int cnt =0;
+    cout<<countTotal(head,sum,cnt)<<endl;
+    cout<<count5(head)<<endl;
+    delete6(head);
+    reverse(head,5);
+    //PLEASE PUT YOUR CODE HERE to call the function assigned
+    display_all(head);
+        
+    return 0;
+}
+
+float countTotal(node* head, int &sum, int &count){
+  if(head == NULL){
+    cout << "sum: " << sum << endl;
+    cout << "cnt: " << count << endl;
+    return (float)sum/count;
+  }
+  
+  else
+    {
+      sum += head->data;
+      count ++;
+      return countTotal(head->next, sum, count);
+    }
+}
+
+int count5(node* head){
+  if(head == NULL){
+    return 0;
+  }
+
+  if(head->data >= 5){
+    return 1 + count5(head->next);
+  }
+  else{
+    return count5(head->next);
+    }
+  }
+
+
+void printReverse(node* head) {
+  if (head ==NULL)
+    return;
+
+  printReverse(head->next);
+  cout << head->data << " ";
+  
+}
+
+int getMax(node* head)  {
+  if (head ==NULL)
+    return 0;
+
+  int max = getMax(head->next);
+  if (max > head->data)
+    return max;
+  else
+    return head->data;
+  
+}
+
+void delete6(node* head){
+
+  /*if(head == NULL){
+    return;
+  }
+
+  else
+  node* temp = head;
+  if(head->data==6){
+    return delete6(head->next);
+  }
+  else{
+  head->next = delete6(head->next);
+  return head;
+  }
+  */
+}
+
+void reverse(node* head, int n){
+  if(head==NULL){
+    head = new node;
+    return;
+  }
+  
+  node* temp = new node;
+  temp->data = n;
+  
+  if(head->next==NULL){
+    head ->next = temp;
+    return;
+  }
+ 
+
+  else
+    {
+      reverse(head->next, n);
+      
+    }
+}
+
